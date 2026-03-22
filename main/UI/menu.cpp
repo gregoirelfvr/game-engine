@@ -1,5 +1,5 @@
 #include "menu.h"
-#include "../character_class.cpp"
+#include "../Class/character_class.cpp"
 #include "../libs/stb_image.h"
 #include "ui_style.h"
 #include <map>
@@ -36,7 +36,7 @@ bool LoadTextureFromFile(const char *filename, GLuint *out_texture,
   return true;
 }
 
-int menu(Character &player) {
+int menu(std::vector<Character> &player_team) {
   glfwInit();
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -45,7 +45,7 @@ int menu(Character &player) {
   glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // Required for Mac
 #endif
 
-  GLFWwindow *window = glfwCreateWindow(1280, 720, "Minimal Text", NULL, NULL);
+  GLFWwindow *window = glfwCreateWindow(1280, 720, "GOA X", NULL, NULL);
   glfwMakeContextCurrent(window);
 
   ImGui::CreateContext();
@@ -61,7 +61,9 @@ int menu(Character &player) {
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
 
-    character_widget(player);
+    for (Character &player : player_team) {
+      character_widget(player);
+    }
 
     ImGui::Render();
     glClear(GL_COLOR_BUFFER_BIT);
