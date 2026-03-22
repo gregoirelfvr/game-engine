@@ -10,7 +10,7 @@ find_package(glfw3 REQUIRED)
 
 set(SOURCES
     main/main.cpp
-    main/menu.cpp
+    main/UI/menu.cpp
     imgui-master/imgui.cpp
     imgui-master/imgui_draw.cpp
     imgui-master/imgui_tables.cpp

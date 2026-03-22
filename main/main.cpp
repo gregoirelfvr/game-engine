@@ -1,5 +1,5 @@
+#include "UI/menu.h"
 #include "character_class.cpp"
-#include "menu.h"
 #include <iostream>
 
 int main() {
