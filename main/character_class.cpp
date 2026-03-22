@@ -4,7 +4,7 @@
 
 class Character {
 protected:
-  std::string name, type;
+  std::string name, type, iconPath;
   int hp, maxHp, level;
 
 public:
@@ -14,12 +14,15 @@ public:
     maxHp = pMaxHp;
     hp = maxHp;
     level = pLevel;
+    iconPath = "";
   }
 
   // Getters
   std::string getName() { return name; }
 
   std::string getType() { return type; }
+
+  std::string getIcon() { return iconPath; }
 
   int getHp() { return hp; }
 
@@ -33,6 +36,8 @@ public:
   void setMaxHp(int pMaxHp) { maxHp = pMaxHp; }
 
   void setLevel(int pLevel) { level = pLevel; }
+
+  void setIcon(std::string pIcon) { iconPath = pIcon; }
 
   // Methods
   virtual void attack() {
