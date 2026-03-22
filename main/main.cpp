@@ -1,7 +1,9 @@
 #include "character_class.cpp"
+#include "menu.h"
 #include <iostream>
 
 int main() {
+  menu();
   Character char1("Greg", "Human", 100, 1);
   char1.attack();
   char1.takeDamage(10);
