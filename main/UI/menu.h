@@ -4,4 +4,7 @@
 #include "../imgui-master/imgui.h"
 #include <GLFW/glfw3.h>
 
-int menu();
+class Character;
+
+int menu(Character& player);
+int character_widget(Character& player);
