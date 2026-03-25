@@ -1,3 +1,4 @@
+#pragma once
 #include <vector>
 #define GL_SILENCE_DEPRECATION
 #include "../imgui-master/backends/imgui_impl_glfw.h"
@@ -7,5 +8,8 @@
 
 class Character;
 
-int character_widget(Character &player);
-int menu(std::vector<Character> &player_team);
+int CharacterWidget(Character &player);
+void InitUI(GLFWwindow* window);
+void RenderUI(std::vector<Character> &player_team);
+void CleanupUI();
+bool LoadTextureFromFile(const char *filename, GLuint *out_texture, int *out_width, int *out_height);

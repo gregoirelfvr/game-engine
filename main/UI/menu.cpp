@@ -1,5 +1,5 @@
 #include "menu.h"
-#include "../Class/character_class.cpp"
+#include "../Class/Character.h"
 #include "../libs/stb_image.h"
 #include "ui_style.h"
 #include <map>
@@ -36,51 +36,33 @@ bool LoadTextureFromFile(const char *filename, GLuint *out_texture,
   return true;
 }
 
-int menu(std::vector<Character> &player_team) {
-  glfwInit();
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-#ifdef __APPLE__
-  glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // Required for Mac
-#endif
-
-  GLFWwindow *window = glfwCreateWindow(1280, 720, "GOA X", NULL, NULL);
-  glfwMakeContextCurrent(window);
-
+void InitUI(GLFWwindow* window) {
   ImGui::CreateContext();
   ImGui_ImplGlfw_InitForOpenGL(window, true);
   ImGui_ImplOpenGL3_Init("#version 330");
-
   ApplyStyle();
+}
 
-  while (!glfwWindowShouldClose(window)) {
-    glfwPollEvents();
-
+void RenderUI(std::vector<Character> &playerTeam) {
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
 
-    for (Character &player : player_team) {
-      character_widget(player);
+    for (Character &player : playerTeam) {
+      CharacterWidget(player);
     }
 
     ImGui::Render();
-    glClear(GL_COLOR_BUFFER_BIT);
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-    glfwSwapBuffers(window);
-  }
+}
 
+void CleanupUI() {
   ImGui_ImplOpenGL3_Shutdown();
   ImGui_ImplGlfw_Shutdown();
   ImGui::DestroyContext();
-  glfwDestroyWindow(window);
-  glfwTerminate();
-
-  return 0;
 }
 
-int character_widget(Character &player) {
+int CharacterWidget(Character &player) {
   ImGui::Begin("Character Stats");
 
   static std::map<std::string, GLuint> texture_cache;
