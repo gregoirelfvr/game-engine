@@ -9,10 +9,10 @@ set(OpenGL_GL_PREFERENCE GLVND)
 find_package(OpenGL REQUIRED)
 find_package(glfw3 REQUIRED)
 
-# Find GLM from homebrew or user local
-find_path(GLM_INCLUDE_DIR glm/glm.hpp PATHS /opt/homebrew/include /usr/local/include)
+# Find GLM from standard system paths
+find_path(GLM_INCLUDE_DIR glm/glm.hpp)
 if(NOT GLM_INCLUDE_DIR)
-    message(FATAL_ERROR "GLM not found! Make sure `brew install glm` was run.")
+    message(FATAL_ERROR "GLM not found! Make sure `glm` is installed.")
 endif()
 
 set(SOURCES
@@ -31,6 +31,7 @@ set(SOURCES
     imgui-master/backends/imgui_impl_glfw.cpp
     imgui-master/backends/imgui_impl_opengl3.cpp
     libs/stb_image_impl.cpp
+    libs/glad/src/gl.c
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES})
@@ -39,6 +40,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/imgui-master
     ${CMAKE_CURRENT_SOURCE_DIR}/imgui-master/backends
     ${GLM_INCLUDE_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}/libs/glad/include
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE 

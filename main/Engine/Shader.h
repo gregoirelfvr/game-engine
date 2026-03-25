@@ -2,11 +2,13 @@
 
 #include <string>
 
+#include <glad/gl.h> 
+
+// 2. THEN THE REST
 #define GL_SILENCE_DEPRECATION
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
-
 class Shader {
 public:
     unsigned int ID;

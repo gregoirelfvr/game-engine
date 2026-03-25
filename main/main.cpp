@@ -4,6 +4,7 @@
 #include "Engine/SpriteRenderer.h"
 #include "Engine/Camera.h"
 #include "UI/menu.h"
+#include <glad/gl.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <iostream>
@@ -40,6 +41,11 @@ int main() {
 
   GLFWwindow *window = glfwCreateWindow(1280, 720, "GOA X", NULL, NULL);
   glfwMakeContextCurrent(window);
+
+  if (!gladLoadGL((GLADloadfunc)glfwGetProcAddress)) {
+      std::cout << "Failed to initialize GLAD" << std::endl;
+      return -1;
+  }
 
   glfwSetKeyCallback(window, key_callback);
 

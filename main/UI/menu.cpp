@@ -1,5 +1,5 @@
 #include "menu.h"
-#include "../Class/character_class.cpp"
+#include "../Class/Character.h"
 #include "../libs/stb/stb_image.h"
 #include "ui_style.h"
 #include <map>
